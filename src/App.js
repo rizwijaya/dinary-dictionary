@@ -1,6 +1,6 @@
 import React from "react";
 // import Results from "./Components/results";
-import Input from "./components/input";
+import Input from "./components/english/input";
 
 function App() {
   return (
