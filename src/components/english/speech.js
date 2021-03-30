@@ -24,7 +24,8 @@ const Dictaphone = ({
 
   return (
     <div>
-      <button onClick={resetTranscript}>Reset</button>
+      {/* <button onClick={resetTranscript}>Reset</button> */}
+      <button onMouseDown={startListening} onMouseUp={stopListening}>Listen</button>
       <span>{transcript}</span>
     </div>
   );
@@ -32,4 +33,8 @@ const Dictaphone = ({
 
 Dictaphone.propTypes = propTypes;
 
-export default SpeechRecognition(Dictaphone);
+var options = {
+    autoStart: false
+}
+
+export default SpeechRecognition(options)(Dictaphone);
