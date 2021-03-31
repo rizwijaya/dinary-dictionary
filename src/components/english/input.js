@@ -5,6 +5,7 @@ import Search from "antd/lib/input/Search";
 import Speech from "./speech";
 export default function Input() {
     const[error, setError] = useState("");
+    const[SearchWord, setSearchWord] = useState("");
     const[word, setWord] = useState("");
     const[definitions, setDefinitions] = useState("");
     const[audio, setAudio] = useState("");
@@ -34,12 +35,21 @@ export default function Input() {
         setAudio(data.results[0].lexicalEntries[0].entries[0].pronunciations[1].audioFile);
         setError(""); //Inisialisasi eror ke strings kosong
     }
+
+    const findWitchSpeech = word => {   //Inisialisasi input voice ke searchword
+        setSearchWord(word);
+    }
+    
     return (
         <Row>
             <Col span={12} offset={6}>
                 <h1> Dinary - Dictionary English</h1>
-                <Search placeholder="input search text" onSearch={value => {searching(value);}} enterButton />
-                <Speech/>
+                <Search value={SearchWord}
+                onChange={event => setSearchWord(event.target.value)}
+                placeholder="input search text" 
+                onSearch={value => {searching(value);}} 
+                enterButton />
+                <Speech findWitchSpeech={findWitchSpeech}/>
             </Col>
             <Col span={6} offset={6}>
             {(() => {
@@ -49,7 +59,7 @@ export default function Input() {
               )
             } else {
                 return ([ //Jika tidak ada eror
-                    <p> {word} - {definitions} </p>,
+                    <p> {word} {SearchWord} - {definitions} </p>,
                     <p> {audio} </p>
                 ]);
             }

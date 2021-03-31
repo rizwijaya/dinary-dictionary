@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import SpeechRecognition from "react-speech-recognition";
 
@@ -16,24 +16,34 @@ const Dictaphone = ({
   resetTranscript,
   browserSupportsSpeechRecognition,
   startListening,
-  stopListening
+  stopListening,
+  findWitchSpeech
 }) => {
-  if (!browserSupportsSpeechRecognition) {
+  if (!browserSupportsSpeechRecognition) { //Jika browser tidak support
     return null;
+  }
+
+  const calling = () => {
+      console.log("Calling");
+      findWitchSpeech(transcript);  //Parsing word dari voice
+      resetTranscript();    //Reset Word pada form
+      stopListening();      //Hentikan Listening
   }
 
   return (
     <div>
-      {/* <button onClick={resetTranscript}>Reset</button> */}
-      <button onMouseDown={startListening} onMouseUp={stopListening}>Listen</button>
-      <span>{transcript}</span>
+      <button 
+        onMouseDown={startListening}
+        onMouseUp={()=>calling()}
+        onMouseLeave={stopListening}
+      >Listen</button>
     </div>
   );
 };
 
 Dictaphone.propTypes = propTypes;
 
-var options = {
+var options = { //Matikan fitur autostart Voice
     autoStart: false
 }
 
