@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import SpeechRecognition from "react-speech-recognition";
+import { AudioOutlined } from '@ant-design/icons';
 
 const propTypes = {
   // Props injected by SpeechRecognition
@@ -36,7 +37,15 @@ const Dictaphone = ({
         onMouseDown={startListening}
         onMouseUp={()=>calling()}
         onMouseLeave={stopListening}
-      >Listen</button>
+        className="listen-button"
+      >
+        <AudioOutlined
+          style={{
+            fontSize: 16,
+            color: '#1890ff',
+          }}
+        />
+      </button>
     </div>
   );
 };
