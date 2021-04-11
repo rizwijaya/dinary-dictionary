@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "antd/dist/antd.css";
-import { Row, Col } from 'antd';
 import Search from "antd/lib/input/Search";
-
+import Speech from "./speech";
+import { Card, Container, Row, Col } from 'react-bootstrap';
 export default function InputUK() {
     const[error, setError] = useState("");
+    const [SearchWord, setSearchWord] = useState("");
     const[word, setWord] = useState("");
     const[definitions, setDefinitions] = useState("");
     useEffect(() => {}, []);
@@ -31,11 +32,27 @@ export default function InputUK() {
         setDefinitions(data.results[0].lexicalEntries[0].entries[0].senses[0].definitions[0]);
         setError(""); //Inisialisasi eror ke strings kosong
     }
+
+    const findWitchSpeech = word => {   //Inisialisasi input voice ke searchword
+        setSearchWord(word);
+    }
+
+    const suffix = (
+        <Speech findWitchSpeech={findWitchSpeech} />
+    );
+
     return (
         <Row>
             <Col span={12} offset={6}>
-                <h1> Dinary - Dictionary English</h1>
-                <Search placeholder="input search text" onSearch={value => {searching(value);}} enterButton />
+            <h1>British English Dictionary</h1>
+                <Search 
+                size="large"
+                value={SearchWord}
+                onChange={event => setSearchWord(event.target.value)}
+                placeholder="input search text" 
+                onSearch={value => {searching(value);}}
+                suffix={suffix} 
+                enterButton />
             </Col>
             <Col span={6} offset={6}>
             {(() => {
