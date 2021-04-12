@@ -12,7 +12,7 @@ function App() {
         <h1 className="h12 mb-0">dinary</h1>
         <Nav className="justify-content-center" activeKey="/">
           <Nav.Item>
-            <Nav.Link><Link to='/'>English</Link></Nav.Link>
+            <Nav.Link><Link to='/'>American English</Link></Nav.Link>
           </Nav.Item>
           <Nav.Item>
             <Nav.Link eventKey="disabled" disabled>
@@ -20,12 +20,12 @@ function App() {
             </Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link><Link to='/BritainsEnglish'>Britains English</Link></Nav.Link>
+            <Nav.Link><Link to='/BritishEnglish'>British English</Link></Nav.Link>
           </Nav.Item>
         </Nav>
         <Switch>
           <Route path="/" exact component={English} />
-          <Route path="/BritainsEnglish" component={EnglishUK} />
+          <Route path="/BritishEnglish" component={EnglishUK} />
         </Switch>
       </Router>
     </div >

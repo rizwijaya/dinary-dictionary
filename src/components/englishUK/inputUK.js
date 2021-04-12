@@ -42,31 +42,67 @@ export default function InputUK() {
     );
 
     return (
-        <Row>
-            <Col span={12} offset={6}>
-            <h1>British English Dictionary</h1>
-                <Search 
-                size="large"
-                value={SearchWord}
-                onChange={event => setSearchWord(event.target.value)}
-                placeholder="input search text" 
-                onSearch={value => {searching(value);}}
-                suffix={suffix} 
-                enterButton />
-            </Col>
-            <Col span={6} offset={6}>
-            {(() => {
-            if (error) {
-              return ( //Jika terjadi eror maka tampilkan berikut
-                <p>No entry found matching supplied American English, word and provided filters</p>
-              )
-            } else {
-                return ([ //Jika tidak ada error
-                     <p> {word} - {definitions} </p>
-                ]);
-            }
-            })()}
-            </Col>
-        </Row>
+        <div>
+            <Container className="mt-5">
+                <Row>
+                    <Col sm={{ span: 6, offset: 3 }}>
+                        <Card className="sear" border="secondary">
+                            <Search
+                                size="large"
+                                value={SearchWord}
+                                onChange={event => setSearchWord(event.target.value)}
+                                placeholder="input search text"
+                                onSearch={value => { searching(value); }}
+                                suffix={suffix}
+                                enterButton
+                            />
+                        </Card>
+                    </Col>
+                </Row>
+                <h3 className="h12 mt-5">British English Dictionary</h3>
+                <Row>
+                    <Col sm={{ span: 8, offset: 2 }}>
+                        <Card className="mt-3 sear" border="secondary">
+                            <Card.Header className="bg-info" >
+                                <div className="fw-title">
+                                    Find a word :
+                                </div>
+                                {(() => {
+                                    if (error) {
+                                        return ( //Jika terjadi eror maka tampilkan berikut
+                                            <div> </div>
+                                        )
+                                    } else {
+                                        return ([ //Jika tidak ada eror
+                                        <div className="fw-word">
+                                            {word}
+                                        </div>
+                                        ]);
+                                    }
+                                })()}
+                            </Card.Header>
+                            <Card.Body>
+                                {(() => {
+                                    if (error) {
+                                        return ( //Jika terjadi eror maka tampilkan berikut
+                                            <div style={{ color: "red", fontWeight: 500 }}>No entry found matching supplied British English, word and provided filters</div>
+                                        )
+                                    } else {
+                                        return ([ //Jika tidak ada eror
+
+                                            <blockquote className="blockquote mb-0">
+                                                <p>
+                                                    {' '} {definitions} {' '}
+                                                </p>
+                                            </blockquote>
+                                        ]);
+                                    }
+                                })()}
+                            </Card.Body>
+                        </Card>
+                    </Col>
+                </Row>
+            </Container>
+        </div>
     );
 };
